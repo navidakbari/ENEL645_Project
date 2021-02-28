@@ -1,0 +1,130 @@
+
+The UAH-DriveSet README:
+
+This bundle contains the UAH-DriveSet, a public set of driving data collected by our driving monitoring app DriveSafe (available in Apple Market) by 6 different drivers and vehicles, performing 3 different behaviors (normal, drowsy and aggressive) on two types of road (motorway and secondary road), resulting in a total of 500 minutes of naturalistic driving. You can find more information in the paper submitted to ITSC2016 (still in review process). If you found this dataset useful please cite us in your work:
+
+"Need Data for Driving Behavior Analysis? Presenting the Public UAH-DriveSet", E. Romera, L.M. Bergasa, R. Arroyo and A. Lázaro., submitted to IEEE International Conference on Intelligent Transportation Systems (ITSC) 2016.
+
+
+Contents of the ZIP bundle:
+   -6 folders with the data and videos from the testers
+   -1 folder with the Python source code for the driveset_reader tool
+
+
+The dataset is divided in folders (one for each of the 6 drivers). Each folder contains a subfolder for each of the performed trips, with the format "Date(YYYYMMDDhhmmss)-Distance(Km)-Driver-Behavior-Road". Each of these subfolders contains a video of the route and 9 files that were fully described in the paper. The start time of the route (first part of the subfolder name) and the start time of the corresponding videos (first part of the video name) are not the same as they were started on different times. The reader tool (see next section) automatically synchronizes this difference: if you select a route in which the video starts for example 10 seconds before, in the reproduction tool the video second will start showing "-10 seconds", and it will reach 0 when the data starts to plot.
+
+
+If you have any question or sugerence regarding either the dataset, the DriveSafe iPhone app or the reader tool, please refer to the author Eduardo Romera by sending an email to: "eduardo.romera@edu.uah.es" or "dudu.erc@gmail.com" with the topic UAH-DriveSet or similar.
+
+
+----------------------------------------------------------------------------------------------------
+
+About the UAH-DriveSet Reader Tool:
+
+The UAH-DriveSet Reader (uah_driveset_reader) is a graphical tool made in Python to read video and data from the dataset simultaneously. The source code is open-source and it can be downloaded from the Github repository: 
+
+https://github.com/Eromera/uah_driveset_reader
+
+A working version is also included in the dataset in the folder "uah_driveset_reader". Follow the README.md instruction to use it.
+
+----------------------------------------------------------------------------------------------------
+
+Bugs and Fix list:
+
+   v1.0 (1/2016): First version released
+
+----------------------------------------------------------------------------------------------------
+
+SEMANTIC_FINAL.txt structure:
+Every value in the list corresponds to a LINE (1 value) in the text file.
+Several variables might be "internal" (meaning that the value is an internal DriveSafe value left in the list for compatibility) or "experimental" (meaning that this feature is in beta and the estimation might not be very correct)
+
+1.  Hour of route start
+2.  Minute of route start
+3.  Second of route start
+4.  Average speed during trip (km/h)
+5.  Maximum achieved speed during route (km/h)
+6.  Lanex score (internal value, related to lane drifting)
+7.  Driving time (in minutes)
+8.  Hour of route end
+9.  Minute of route end
+10. Second of route end
+11. Trip distance (km)
+12. ScoreLongDist	(internal value, Score accelerations)
+13. ScoreTranDist	(internal value, Score turnings)
+14. ScoreSpeedDist (internal value, Score brakings)
+15. ScoreGlobal (internal value, old score that is not used anymore)
+16. Alerts Long (internal value)
+17. Alerts Late (internal value)
+18. Alerts Lanex (internal value)
+19. Number of vehicle stops during route (experimental, related to fuel efficiency estimation)
+20. Speed variability (experimental, related to fuel efficiency estimation)
+21. Acceleration noise (experimental, related to fuel efficiency estimation)
+22. Kinetic energy (experimental, related to fuel efficiency estimation)
+23. Driving time (in seconds)
+24. Number of curves in the route
+25. Power exherted (experimental, related to fuel efficiency estimation)
+26. Acceleration events (internal value) 
+27. Braking events (internal value) 
+28. Turning events (internal value) 
+29. Longitudinal-distraction Global Score (internal value, combines mean[31] and std[32])
+30. Transversal-distraction Global Score (internal value, combines mean[33] and std[34])
+31. Mean Long.-dist. score (internal value)
+32. STD Long.-dist. score (internal value)
+33. Average Trans.-dist. score (internal value)
+34. STD Trans.-dist. score (internal value)
+35. Lacc (number of low accelerations)
+36. Macc (number of medium accelerations)
+37. Hacc (number of high accelerations)
+38. Lbra (number of low brakings)
+39. Mbra (number of medium brakings)
+40. Hbra (number of high brakings)
+41. Ltur (number of low turnings)
+42. Mtur (number of medium turnings)
+43. Htur (number of high turnings)
+44. Score total (base 100, direct mean of the other 7 scores [45-51])
+45. Score accelerations (base 100)
+46. Score brakings (base 100)
+47. Score turnings (base 100)
+48. Score lane-weaving (base 100)
+49. Score lane-drifting (base 100)
+50. Score overspeeding (base 100)
+51. Score car-following (base 100)
+52. Ratio normal (base 1)
+53. Ratio drowsy (base 1)
+54. Ratio aggressive (base 1)
+
+----------------------------------------------------------------------------------------------------
+
+SEMANTIC_ONLINE.txt structure:
+
+Every value in the list corresponds to a COLUMN (sequence of values) in the text file.
+The "WINDOW" scores are the scores estimated for the last minute (60 seconds) during the route, and the other scores are estimated as the score since the route start until that time in the route (the last line of this file will have the same final scores as the values stored in SEMANTIC_FINAL)
+
+1.  TimeStamp since route start (seconds)
+2.  GPS Latitude (degrees)
+3.  GPS Longitude (degrees)
+4.  Score total WINDOW (base 100, direct mean of the other 7 scores)
+5.  Score accelerations WINDOW (base 100)
+6.  Score brakings WINDOW (base 100)
+7.  Score turnings WINDOW (base 100)
+8.  Score weaving WINDOW (base 100)
+9.  Score drifting WINDOW (base 100)
+10. Score overspeeding WINDOW (base 100)
+11. Score car-following WINDOW (base 100)
+12. Ratio normal WINDOW (base 1)
+13. Ratio drowsy WINDOW (base 1)
+14. Ratio aggressive WINDOW (base 1)
+15. Ratio distracted WINDOW (1=distraction detected in last 2 seconds, 0=otherwise)
+16. Score total (base 100, direct mean of the other 7 scores)
+17. Score accelerations (base 100)
+18. Score brakings (base 100)
+19. Score turnings (base 100) 
+20. Score weaving (base 100)
+21. Score drifting (base 100)
+22. Score overspeeding (base 100)
+23. Score car-following (base 100)
+24. Ratio normal (base 1)
+25. Ratio drowsy (base 1)
+26. Ratio aggressive (base 1)
+27. Ratio distracted (1=distraction detected in last 2 seconds, 0=otherwise)
